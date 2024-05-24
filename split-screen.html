@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Google Fonts API link -->
+        <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&family=Montserrat:wght@400;700&family=Poppins:wght@400;700&family=Hanken+Grotesk:wght@400;700&family=Mulish:wght@400;700&family=Lora:wght@400;700&family=Noto+Serif:wght@400;700&family=Spectral:wght@400;700&family=Roboto+Slab:wght@400;700&family=Dancing+Script:wght@400;700&display=swap"
+        id="google-font">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Inter:wght@400;500;700;900&family=Montserrat:wght@400;500;700;900&family=Poppins:wght@400;500;700;900&family=Hanken+Grotesk:wght@400;500;700;900&family=Mulish:wght@400;500;700;900&family=Lora:wght@400;500;700;900&family=Noto+Serif:wght@400;500;700;900&family=Spectral:wght@400;500;700;900&family=Roboto+Slab:wght@400;500;700;900&family=Dancing+Script:wght@400;500;700;900&display=swap"
+        id="google-font">
+
+    <link rel="stylesheet"
+    href="https://unpkg.com/vuetify@2.7.1/dist/vuetify.min.css"
+    id="">
+    <link rel="stylesheet"
+    href="https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css"
+    id="">
+
+
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperSFW Workroom</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype UI</title>
+    <!-- <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="scss/cover.css">
+    <link rel="stylesheet" href="scss/invoice.css">
+    <link rel="stylesheet" href="scss/modular-sections.css">
+    <link rel="stylesheet" href="scss/modal.css">
+    <link rel="stylesheet" href="scss/workroom-concept.css">
+    <link rel="stylesheet" href="scss/sidenav.css">
+    <link rel="stylesheet" href="scss/tailwind.css">
+    <link rel="stylesheet" href="scss/snipped.css">
+    <link rel="stylesheet" href="scss/default.css" id="theme">
+    <link rel="stylesheet" href="scss/clearstyles.css">
+    <link rel="stylesheet" href="scss/imageBoard.css">
+    <link rel="stylesheet" href="scss/proposal-section.css">
+    <link rel="stylesheet" href="scss/3col.css">
+    <link rel="stylesheet" href="scss/newStyles.css">
+    <link rel="stylesheet" href="scss/image-grids.css"> -->
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#toolbar {
+    display: flex;
+    justify-content: flex-start;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+#toolbar button {
+    background-color: #444;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#toolbar button:hover {
+    background-color: #555;
+}
+
+#container {
+    display: flex;
+    height: calc(100% - 50px); /* Adjust height to account for the toolbar */
+    padding-top: 50px; /* Adjust for toolbar height */
+}
+
+#leftPane, #rightPane {
+    padding: 20px;
+    overflow: auto;
+    box-sizing: border-box;
+    /* transition: flex 0.3s ease; */
+}
+
+#leftPane {
+    background-color: #f0f0f0;
+    flex: 1; /* Ensure initial flex distribution */
+}
+
+#rightPane {
+    background-color: #ffffff;
+    border-left: 1px solid #ccc;
+    flex: 1; /* Ensure initial flex distribution */
+}
+
+#divider {
+    width: 10px;
+    cursor: col-resize;
+    background-color: #ddd;
+    flex-shrink: 0;
+}
+
+.collapsed {
+    display: none;
+}
+
+
+
+
+
+
+</style>
+
+</head>
+<body>
+    <div id="toolbar">
+        <button id="toggleLeft">Toggle Left</button>
+        <button id="toggleRight">Toggle Right</button>
+    </div>
+    <div id="container">
+        <div id="leftPane">
+
+            <div id="app">
+                <v-app id="inspire">
+                  
+                 <div class="expansion-panels-container">
+                   <v-expansion-panels>
+                    <v-expansion-panel>
+                      <v-expansion-panel-header>
+                        <template v-slot:default="{ open }">
+                          <v-row no-gutters>
+                            <v-col cols="4">
+                              Trip name
+                            </v-col>
+                            <v-col
+                              cols="8"
+                              class="text--secondary"
+                            >
+                              <v-fade-transition leave-absolute>
+                                <span
+                                  v-if="open"
+                                  key="0"
+                                >
+                                  Enter a name for the trip
+                                </span>
+                                <span
+                                  v-else
+                                  key="1"
+                                >
+                                  {{ trip.name }}
+                                </span>
+                              </v-fade-transition>
+                            </v-col>
+                          </v-row>
+                        </template>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <v-text-field
+                          v-model="trip.name"
+                          placeholder="Caribbean Cruise"
+                        ></v-text-field>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                
+                    <v-expansion-panel>
+                      <v-expansion-panel-header v-slot="{ open }">
+                        <v-row no-gutters>
+                          <v-col cols="4">
+                            Location
+                          </v-col>
+                          <v-col
+                            cols="8"
+                            class="text--secondary"
+                          >
+                            <v-fade-transition leave-absolute>
+                              <span
+                                v-if="open"
+                                key="0"
+                              >
+                                Select trip destination
+                              </span>
+                              <span
+                                v-else
+                                key="1"
+                              >
+                                {{ trip.location }}
+                              </span>
+                            </v-fade-transition>
+                          </v-col>
+                        </v-row>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <v-row no-gutters>
+                          <v-spacer></v-spacer>
+                          <v-col cols="5">
+                            <v-select
+                              v-model="trip.location"
+                              :items="locations"
+                              chips
+                              flat
+                              solo
+                            ></v-select>
+                          </v-col>
+                
+                          <v-divider
+                            vertical
+                            class="mx-4"
+                          ></v-divider>
+                
+                          <v-col cols="3">
+                            Select your destination of choice
+                            <br>
+                            <a href="#">Learn more</a>
+                          </v-col>
+                        </v-row>
+                
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                            text
+                            color="secondary"
+                          >
+                            Cancel
+                          </v-btn>
+                          <v-btn
+                            text
+                            color="primary"
+                          >
+                            Save
+                          </v-btn>
+                        </v-card-actions>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                
+                    <v-expansion-panel>
+                      <v-expansion-panel-header v-slot="{ open }">
+                        <v-row no-gutters>
+                          <v-col cols="4">
+                            Start and end dates
+                          </v-col>
+                          <v-col
+                            cols="8"
+                            class="text--secondary"
+                          >
+                            <v-fade-transition leave-absolute>
+                              <span v-if="open">When do you want to travel?</span>
+                              <v-row
+                                v-else
+                                no-gutters
+                                style="width: 100%"
+                              >
+                                <v-col cols="6">
+                                  Start date: {{ trip.start || 'Not set' }}
+                                </v-col>
+                                <v-col cols="6">
+                                  End date: {{ trip.end || 'Not set' }}
+                                </v-col>
+                              </v-row>
+                            </v-fade-transition>
+                          </v-col>
+                        </v-row>
+                      </v-expansion-panel-header>
+                      <v-expansion-panel-content>
+                        <v-row
+                          justify="space-around"
+                          no-gutters
+                        >
+                          <v-col cols="3">
+                            <v-menu
+                              ref="startMenu"
+                              :close-on-content-click="false"
+                              :return-value.sync="trip.start"
+                              offset-y
+                              min-width="290px"
+                            >
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-text-field
+                                  v-model="trip.start"
+                                  label="Start date"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                v-model="date"
+                                no-title
+                                scrollable
+                              >
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                  text
+                                  color="primary"
+                                  @click="$refs.startMenu.isActive = false"
+                                >
+                                  Cancel
+                                </v-btn>
+                                <v-btn
+                                  text
+                                  color="primary"
+                                  @click="$refs.startMenu.save(date)"
+                                >
+                                  OK
+                                </v-btn>
+                              </v-date-picker>
+                            </v-menu>
+                          </v-col>
+                
+                          <v-col cols="3">
+                            <v-menu
+                              ref="endMenu"
+                              :close-on-content-click="false"
+                              :return-value.sync="trip.end"
+                              offset-y
+                              min-width="290px"
+                            >
+                              <template v-slot:activator="{ on, attrs }">
+                                <v-text-field
+                                  v-model="trip.end"
+                                  label="End date"
+                                  prepend-icon="mdi-calendar"
+                                  readonly
+                                  v-bind="attrs"
+                                  v-on="on"
+                                ></v-text-field>
+                              </template>
+                              <v-date-picker
+                                v-model="date"
+                                no-title
+                                scrollable
+                              >
+                                <v-spacer></v-spacer>
+                                <v-btn
+                                  text
+                                  color="primary"
+                                  @click="$refs.endMenu.isActive = false"
+                                >
+                                  Cancel
+                                </v-btn>
+                                <v-btn
+                                  text
+                                  color="primary"
+                                  @click="$refs.endMenu.save(date)"
+                                >
+                                  OK
+                                </v-btn>
+                              </v-date-picker>
+                            </v-menu>
+                          </v-col>
+                        </v-row>
+                      </v-expansion-panel-content>
+                    </v-expansion-panel>
+                  </v-expansion-panels>
+                  </div>  
+                  
+                  
+                  
+                 <div class="timeline-container">
+                    <v-container style="max-width: 600px;">
+                      <v-timeline
+                        dense
+                        clipped
+                      >
+                        <v-timeline-item
+                          fill-dot
+                          class="white--text mb-12"
+                          color="orange"
+                          large
+                        >
+                          <template v-slot:icon>
+                            <span>JL</span>
+                          </template>
+                          <v-text-field
+                            v-model="input"
+                            hide-details
+                            flat
+                            label="Leave a comment..."
+                            solo
+                            @keydown.enter="comment"
+                          >
+                            <template v-slot:append>
+                              <v-btn
+                                class="mx-0"
+                                depressed
+                                @click="comment"
+                              >
+                                Post
+                              </v-btn>
+                            </template>
+                          </v-text-field>
+                        </v-timeline-item>
+              
+                        <v-slide-x-transition
+                          group
+                        >
+                          <v-timeline-item
+                            v-for="event in timeline"
+                            :key="event.id"
+                            class="mb-4"
+                            color="pink"
+                            small
+                          >
+                            <v-row justify="space-between">
+                              <v-col
+                                cols="7"
+                                v-text="event.text"
+                              ></v-col>
+                              <v-col
+                                class="text-right"
+                                cols="5"
+                                v-text="event.time"
+                              ></v-col>
+                            </v-row>
+                          </v-timeline-item>
+                        </v-slide-x-transition>
+              
+                        <v-timeline-item
+                          class="mb-6"
+                          hide-dot
+                        >
+                          <span>TODAY</span>
+                        </v-timeline-item>
+              
+                        <v-timeline-item
+                          class="mb-4"
+                          color="grey"
+                          icon-color="grey lighten-2"
+                          small
+                        >
+                          <v-row justify="space-between">
+                            <v-col cols="7">
+                              This order was archived.
+                            </v-col>
+                            <v-col
+                              class="text-right"
+                              cols="5"
+                            >
+                              15:26 EDT
+                            </v-col>
+                          </v-row>
+                        </v-timeline-item>
+              
+                        <v-timeline-item
+                          class="mb-4"
+                          small
+                        >
+                          <v-row justify="space-between">
+                            <v-col cols="7">
+                              <v-chip
+                                class="white--text ml-0"
+                                color="purple"
+                                label
+                                small
+                              >
+                                APP
+                              </v-chip>
+                              Digital Downloads fulfilled 1 item.
+                            </v-col>
+                            <v-col
+                              class="text-right"
+                              cols="5"
+                            >
+                              15:25 EDT
+                            </v-col>
+                          </v-row>
+                        </v-timeline-item>
+              
+                        <v-timeline-item
+                          class="mb-4"
+                          color="grey"
+                          small
+                        >
+                          <v-row justify="space-between">
+                            <v-col cols="7">
+                              Order confirmation email was sent to John Leider (john@vuetifyjs.com).
+                            </v-col>
+                            <v-col
+                              class="text-right"
+                              cols="5"
+                            >
+                              15:25 EDT
+                            </v-col>
+                          </v-row>
+                        </v-timeline-item>
+              
+                        <v-timeline-item
+                          class="mb-4"
+                          hide-dot
+                        >
+                          <v-btn
+                            class="mx-0"
+                          >
+                            Resend Email
+                          </v-btn>
+                        </v-timeline-item>
+              
+                        <v-timeline-item
+                          class="mb-4"
+                          color="grey"
+                          small
+                        >
+                          <v-row justify="space-between">
+                            <v-col cols="7">
+                              A $15.00 USD payment was processed on PayPal Express Checkout
+                            </v-col>
+                            <v-col
+                              class="text-right"
+                              cols="5"
+                            >
+                              15:25 EDT
+                            </v-col>
+                          </v-row>
+                        </v-timeline-item>
+              
+                        <v-timeline-item
+                          color="grey"
+                          small
+                        >
+                          <v-row justify="space-between">
+                            <v-col cols="7">
+                              John Leider placed this order on Online Store (checkout #1937432132572).
+                            </v-col>
+                            <v-col
+                              class="text-right"
+                              cols="5"
+                            >
+                              15:25 EDT
+                            </v-col>
+                          </v-row>
+                        </v-timeline-item>
+                      </v-timeline>
+                    </v-container>
+                  </div>
+                  
+                  <v-row>
+                    <v-col
+                      v-for="n in 9"
+                      :key="n"
+                      class="d-flex child-flex"
+                      cols="4"
+                    >
+                      <v-img
+                        :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
+                        :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                        aspect-ratio="1"
+                        class="grey lighten-2"
+                      >
+                        <template v-slot:placeholder>
+                          <v-row
+                            class="fill-height ma-0"
+                            align="center"
+                            justify="center"
+                          >
+                            <v-progress-circular
+                              indeterminate
+                              color="grey lighten-5"
+                            ></v-progress-circular>
+                          </v-row>
+                        </template>
+                      </v-img>
+                    </v-col>
+                  </v-row>
+                </v-app>
+              </div>
+            
+            <div id="contentPreview">
+                <h2>Content Preview</h2>
+                <p id="previewText">Text will appear here.</p>
+                <p id="previewCheckbox">Checkbox is: <span>unchecked</span></p>
+                <p id="previewRadio">Selected option: <span>none</span></p>
+                <p id="previewTextarea">Textarea content will appear here.</p>
+                <p id="previewSelect">Selected item: <span>none</span></p>
+                <p id="previewDate">Selected date: <span>none</span></p>
+            </div>
+        </div>
+        <div id="divider"></div>
+        <div id="rightPane">
+            <div>
+                freestar
+                
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempor lacus leo, non ullamcorper lacus varius sit amet. Etiam eu dictum lacus. Proin semper et arcu sed egestas. Fusce efficitur nibh a dui fringilla, id feugiat magna cursus. Nunc a nisi at felis pharetra convallis at eget ipsum. Nullam sed ipsum condimentum, bibendum libero sit amet, dapibus nisi. Etiam eleifend quam eget lorem sagittis, in euismod elit congue. Nam consectetur porta dui id commodo. Nunc tincidunt arcu at enim vestibulum condimentum. Suspendisse sit amet erat id leo posuere egestas a sit amet nisl. Praesent a facilisis odio, in vestibulum massa. Mauris eu consectetur nisi.</div>
+            <div id="formInputs">
+                <label for="contentInput">Edit Text:</label>
+                <input type="text" id="contentInput" placeholder="Enter text">
+                <br><br>
+                <label><input type="checkbox" id="contentCheckbox"> Checkbox</label>
+                <br><br>
+                <label>Radio Buttons:</label><br>
+                <label><input type="radio" name="contentRadio" value="Option 1"> Option 1</label><br>
+                <label><input type="radio" name="contentRadio" value="Option 2"> Option 2</label>
+                <br><br>
+                <label for="contentTextarea">Edit Textarea:</label>
+                <textarea id="contentTextarea" rows="4" cols="50" placeholder="Enter long text"></textarea>
+                <br><br>
+                <label for="contentSelect">Select an item:</label>
+                <select id="contentSelect">
+                    <option value="">--Choose an option--</option>
+                    <option value="Item 1">Item 1</option>
+                    <option value="Item 2">Item 2</option>
+                    <option value="Item 3">Item 3</option>
+                </select>
+                <br><br>
+                <label for="contentDate">Pick a date:</label>
+                <input type="date" id="contentDate">
+                <br><br>
+                <button id="updateContent">Update</button>
+            </div>
+        </div>
+    </div>
+     
+    
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
+    <script src="https://unpkg.com/vue@2.x/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuetify@2.7.1/dist/vuetify.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.7.7/babel.min.js"></script>
+    <script text="text/babel">
+        new Vue({
+            el: '#app',
+            vuetify: new Vuetify(),
+            data: () => ({
+                date: null,
+                trip: {
+                name: '',
+                location: null,
+                start: null,
+                end: null,
+                },
+                locations: ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'],
+            }),
+        })
+    </script>
+
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+    <script>
+
+
+let isDragging = false;
+
+const divider = document.getElementById('divider');
+const container = document.getElementById('container');
+const leftPane = document.getElementById('leftPane');
+const rightPane = document.getElementById('rightPane');
+const toggleLeft = document.getElementById('toggleLeft');
+const toggleRight = document.getElementById('toggleRight');
+const contentPreview = document.getElementById('contentPreview');
+const contentInput = document.getElementById('contentInput');
+const contentCheckbox = document.getElementById('contentCheckbox');
+const contentRadio = document.getElementsByName('contentRadio');
+const contentTextarea = document.getElementById('contentTextarea');
+const contentSelect = document.getElementById('contentSelect');
+const contentDate = document.getElementById('contentDate');
+const updateContent = document.getElementById('updateContent');
+
+divider.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+});
+
+function onMouseMove(e) {
+    if (!isDragging) return;
+    const containerRect = container.getBoundingClientRect();
+    const leftWidth = e.clientX - containerRect.left;
+    const totalWidth = containerRect.width;
+    const leftFlexBasis = (leftWidth / totalWidth) * 100;
+    leftPane.style.flex = `0 0 ${leftFlexBasis}%`;
+    rightPane.style.flex = `0 0 ${100 - leftFlexBasis}%`;
+}
+
+function onMouseUp() {
+    isDragging = false;
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+}
+
+toggleLeft.addEventListener('click', () => {
+    if (leftPane.classList.toggle('collapsed')) {
+        leftPane.style.flex = '0 0 0';
+        leftPane.style.display = 'none';
+        rightPane.style.flex = '1'; // Make rightPane take full width
+        rightPane.style.display = 'block';
+    } else {
+        leftPane.style.flex = '1';
+        leftPane.style.display = 'block';
+        rightPane.style.flex = '1';
+        rightPane.style.display = 'block';
+        // Reset inline flex styles set by dragging
+        leftPane.style.flexBasis = '';
+        rightPane.style.flexBasis = '';
+    }
+});
+
+toggleRight.addEventListener('click', () => {
+    if (rightPane.classList.toggle('collapsed')) {
+        rightPane.style.flex = '0 0 0';
+        rightPane.style.display = 'none';
+        leftPane.style.flex = '1'; // Make leftPane take full width
+        leftPane.style.display = 'block';
+    } else {
+        rightPane.style.flex = '1';
+        rightPane.style.display = 'block';
+        leftPane.style.flex = '1';
+        leftPane.style.display = 'block';
+        // Reset inline flex styles set by dragging
+        leftPane.style.flexBasis = '';
+        rightPane.style.flexBasis = '';
+    }
+});
+
+updateContent.addEventListener('click', () => {
+    document.getElementById('previewText').textContent = contentInput.value;
+    document.getElementById('previewCheckbox').querySelector('span').textContent = contentCheckbox.checked ? 'checked' : 'unchecked';
+    
+    let selectedRadio;
+    for (const radio of contentRadio) {
+        if (radio.checked) {
+            selectedRadio = radio.value;
+            break;
+        }
+    }
+    document.getElementById('previewRadio').querySelector('span').textContent = selectedRadio || 'none';
+    
+    document.getElementById('previewTextarea').textContent = contentTextarea.value;
+    document.getElementById('previewSelect').querySelector('span').textContent = contentSelect.value || 'none';
+    document.getElementById('previewDate').querySelector('span').textContent = contentDate.value || 'none';
+});
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
